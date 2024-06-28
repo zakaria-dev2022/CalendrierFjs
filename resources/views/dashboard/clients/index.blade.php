@@ -1,45 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+@extends('dashboard.sidebar')
+@section('content')
+<a href="{{route('clients.create')}}" class="btn btn- my-4 px-5 btn-primary">ajouter</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">nom_entreprise</th>
+      <th scope="col">nom_directeur</th>
+      <th scope="col">nom_contact</th>
+      <th scope="col">tel</th>
+      <th scope="col">email</th>
+      <th scope="col">copy_fiscale</th>
+      <th scope="col">copy_bancaire</th>
+      <th scope="col">actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($clients as $client)
+    <tr>
+      <th scope="row">{{$client->id}}</th>
+      <td>{{$client->nom_entreprise}}</td>
+      <td>{{$client->nom_contact}}</td>
+      <td>{{$client->fonction}}</td>
+      <td>{{$client->nom_directeur}}</td>
+      <td>{{$client->email}}</td>
+      <td><img src="{{$client->copy_fiscale}}" alt="" width="80px" height="70px"></td>
+      <td><img src="{{$client->copy_bancaire}}" alt="" width="80px" height="70px"></td>
+      <td > 
+        <a href="{{route('clients.show',$client->id)}}" class="btn btn-sm btn-info px-3">C</a>
+        <a href="{{route('clients.edit',$client->id)}}" class="btn btn-sm btn-warning px-3 my-2">M</a>
+        <form class="d-" action="{{route('clients.destroy',$client->id)}}" method="post">
+        @method('DELETE')
+        @csrf
+        <button  onclick="return confirm('Voulez-vous supprimer le client ?');" class="btn btn-sm btn-danger px-3">S</button>
+        </form>
+    </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 
-    <title>Document</title>
-</head>
-<body>
-  <h1>client</h1>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection

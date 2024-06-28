@@ -11,7 +11,7 @@ class calendrierController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.calendriers.index');
     }
 
     /**

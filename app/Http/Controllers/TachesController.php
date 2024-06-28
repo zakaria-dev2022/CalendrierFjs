@@ -11,7 +11,7 @@ class TachesController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.taches.index');
     }
 
     /**
